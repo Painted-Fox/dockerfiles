@@ -1,0 +1,14 @@
+# jekyll - Transform your plain text into static websites and blogs.
+
+FROM ruby
+MAINTAINER Ryan Seto <ryanseto@yak.net>
+
+# Install jekyll
+RUN gem install --no-rdoc --no-ri jekyll
+
+# Setup where jekyll will run.
+VOLUME ["/data/src", "/data/pub"]
+CMD    ["--source", "/data/src", "--destination", "/data/pub"]
+
+# Run jekyll when we run this container.
+ENTRYPOINT ["jekyll"]
