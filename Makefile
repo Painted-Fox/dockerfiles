@@ -1,12 +1,15 @@
 # Help build my docker files into images.
 
 ruby:
-	sudo docker build -t paintedfox/ruby - < ruby.docker
+	docker build -t paintedfox/ruby - < ruby.docker
 
 jekyll:
-	sudo docker build -t paintedfox/jekyll - < jekyll.docker
+	docker build -t paintedfox/jekyll - < jekyll.docker
+
+tinyproxy:
+	docker build -t paintedfox/tinyproxy - < tinyproxy.docker
 
 # Cleans up old containers.
 # http://stackoverflow.com/a/18141323
 clean:
-	sudo docker rm `sudo docker ps -a -q`
+	docker rm `docker ps -a -q`
