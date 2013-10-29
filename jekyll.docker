@@ -1,6 +1,6 @@
 # jekyll - Transform your plain text into static websites and blogs.
 
-FROM ruby
+FROM paintedfox/ruby
 MAINTAINER Ryan Seto <ryanseto@yak.net>
 
 # Install jekyll
@@ -12,3 +12,6 @@ CMD    ["--source", "/data/src", "--destination", "/data/pub"]
 
 # Run jekyll when we run this container.
 ENTRYPOINT ["jekyll"]
+
+# By default, jekyll serve runs on this port.
+EXPOSE 4000
