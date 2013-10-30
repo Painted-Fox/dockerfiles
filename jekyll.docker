@@ -7,8 +7,8 @@ MAINTAINER Ryan Seto <ryanseto@yak.net>
 RUN gem install --no-rdoc --no-ri jekyll
 
 # Setup where jekyll will run.
-VOLUME ["/data/src", "/data/pub"]
-CMD    ["--source", "/data/src", "--destination", "/data/pub"]
+VOLUME ["/data"]
+WORKDIR /data
 
 # Run jekyll when we run this container.
 ENTRYPOINT ["jekyll"]
