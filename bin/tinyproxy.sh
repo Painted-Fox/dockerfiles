@@ -1,5 +1,7 @@
 #!/bin/bash
 
+etc=$( cd -P "$( dirname $0 )/../etc" && pwd )
+
 SUDO=
 if [[ $EUID -ne 0 ]]; then
     # Use sudo if we aren't root.
@@ -9,7 +11,7 @@ fi
 mkdir -p "/tmp/tinyproxy/"
 eval $SUDO chown daemon:daemon "/tmp/tinyproxy"
 eval $SUDO docker run \
-    -v `pwd`/etc:"/data/etc" \
+    -v $etc:"/data/etc" \
     -v "/tmp/tinyproxy/":"/data/log" \
     -p 8765:8765 \
     -d \
