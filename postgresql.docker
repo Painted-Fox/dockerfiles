@@ -1,0 +1,23 @@
+# Postgresql
+
+FROM ubuntu
+MAINTAINER Ryan Seto <ryanseto@yak.net>
+
+RUN apt-get update
+RUN locale-gen en_US.UTF-8
+ENV LANG       en_US.UTF-8
+ENV LC_ALL     en_US.UTF-8
+
+# Install the latest postgresql
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+ADD http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc postgres_key.asc
+RUN apt-key add postgres_key.asc
+RUN rm postgres_key.asc
+RUN apt-get update
+RUN apt-get install -y postgresql-9.3
+
+VOLUME ["/data/etc", "/data/db"]
+ENTRYPOINT ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/data/db", "-c", "config_file=/data/etc/postgresql.conf"]
+
+USER daemon
+EXPOSE 5432

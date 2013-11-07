@@ -1,0 +1,17 @@
+# ruhoh - Publish websites like a BOSS B]
+
+FROM paintedfox/ruby
+MAINTAINER Ryan Seto <ryanseto@yak.net>
+
+# Install ruhoh
+RUN gem install --no-rdoc --no-ri ruhoh
+
+# Setup where ruhoh will run.
+VOLUME ["/data"]
+WORKDIR /data
+
+# Run ruhoh when we run this container.
+ENTRYPOINT ["ruhoh"]
+
+# By default, ruhoh serve runs on this port.
+EXPOSE 9292
